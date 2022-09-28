@@ -2,9 +2,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var query = require('../server/sql/connect')
+var sql = require('../server/sql/sql')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -16,9 +17,6 @@ app.all('*', function (req, res, next) {
     req.method == "OPTIONS" ? res.send(200) : next()
 })
 
-var testRouter = require('./routes/login')
-app.use('/login', testRouter)
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,6 +24,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
+app.get(`/login`,(req,res)=>{
+    console.log(req)
+    query(sql.users,(err,result,fields)=>{
+        if(err) {
+            console.log('SELECT ERROR:',err.message);
+        }
+        res.send({result})
+    })
+})
 module.exports = app;

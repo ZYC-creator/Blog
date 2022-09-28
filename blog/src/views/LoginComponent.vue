@@ -32,20 +32,20 @@ export default defineComponent({
             password: '',
         })
         let msg = '';
-        axios.get("http://localhost:8080/login")
+        const Register = () => {
+            $router.push({ path: '/register' })
+        }
+        const Login = ()=>{
+            axios.get("http://localhost:8080/login")
             .then((res) => {
-                msg = res.data;
+                console.log(res)
+                msg = res.data.result;
                 console.log(msg);
 
             })
             .catch((err) => {
                 console.log(err);
             });
-        console.log(msg);
-        const Register = () => {
-            $router.push({ path: '/register' })
-        }
-        const Login = ()=>{
             console.log(formLabelAlign);
             
         }
