@@ -31,23 +31,24 @@ export default defineComponent({
             name: '',
             password: '',
         })
-        let msg = '';
+        let msg:Array<string> = [];
         const Register = () => {
             $router.push({ path: '/register' })
         }
         const Login = ()=>{
-            axios.get("http://localhost:8080/login")
+            axios.post("http://localhost:8080/login",formLabelAlign)
             .then((res) => {
-                console.log(res)
-                msg = res.data.result;
-                console.log(msg);
-
+                if(res.data.results !=0){
+                    alert('登录成功')
+                    $router.push({path:'/HomePage'})
+                }
+                else {
+                    alert(res.data.msg)
+                }
             })
             .catch((err) => {
-                console.log(err);
+                alert(err);
             });
-            console.log(formLabelAlign);
-            
         }
         return {
             msg,
