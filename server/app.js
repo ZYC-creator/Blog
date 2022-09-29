@@ -27,13 +27,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bp.urlencoded({extended:false}))
 app.use('/', indexRouter);
 
-app.get(`/register`,(req,res)=>{
-    console.log(req)
-    query(sql.users,(err,result,fields)=>{
+app.post('/register',(req,res)=>{
+    const sql = `insert into blog.users(username,password,gender,birthday) values ('${req.body.username}','${req.body.password}','${req.body.gender}','${req.body.birthday}')` 
+    query(sql,(err,result,fields)=>{
         if(err) {
-            console.log('SELECT ERROR:',err.message);
+            res.send({msg:'注册失败'})
         }
-        res.send({result})
+        res.send('注册成功')
     })
 })
 

@@ -40,7 +40,7 @@ export default defineComponent({
             .then((res) => {
                 if(res.data.results !=0){
                     alert('登录成功')
-                    $router.push({path:'/HomePage'})
+                    $router.push({path:`/HomePage/${formLabelAlign.name}`})
                 }
                 else {
                     alert(res.data.msg)
