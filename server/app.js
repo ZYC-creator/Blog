@@ -60,4 +60,18 @@ app.post('/login',(req,res)=>{
         }
     })
 })
+
+app.get('/article',(req,res)=>{
+    query(sql.article,(err,results,field)=>{
+        if(err) {
+            res.send('查询失败')
+        }
+        res.send(
+            {
+                status:200,
+                msg:'success',
+                results
+            })
+    })
+})
 module.exports = app;

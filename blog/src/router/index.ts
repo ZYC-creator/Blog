@@ -19,7 +19,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/HomePage/:username?',
     name: 'HomePage',
     props:true,
-    component:()=>import('../views/HomePageComponent.vue')
+    component:()=>import('../views/HomePageComponent.vue'),
+  },
+  {
+    path:'/HomePage/detail/:id?',
+    name:'detail',
+    component:()=>import('../views/DetailComponent.vue'),
   }
 ]
 
