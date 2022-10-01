@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect:'/login'
+    redirect:'/HomePage'
   },
   {
     path:'/login',
@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component:()=>import('../views/HomePageComponent.vue'),
   },
   {
-    path:'/HomePage/detail/:id?',
+    path:'/detail/:id?/:username?',
     name:'detail',
     component:()=>import('../views/DetailComponent.vue'),
   }

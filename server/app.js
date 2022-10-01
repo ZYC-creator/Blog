@@ -24,52 +24,87 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bp.urlencoded({extended:false}))
+app.use(bp.urlencoded({ extended: false }))
 app.use('/', indexRouter);
 
-app.post('/register',(req,res)=>{
-    const sql = `insert into blog.users(username,password,gender,birthday) values ('${req.body.username}','${req.body.password}','${req.body.gender}','${req.body.birthday}')` 
-    query(sql,(err,result,fields)=>{
-        if(err) {
-            res.send({msg:'注册失败'})
+app.post('/register', (req, res) => {
+    const sql = `insert into blog.users(username,password,gender,birthday) values ('${req.body.username}','${req.body.password}','${req.body.gender}','${req.body.birthday}')`
+    query(sql, (err, result, fields) => {
+        if (err) {
+            res.send({ msg: '注册失败' })
         }
         res.send('注册成功')
     })
 })
 
-app.post('/login',(req,res)=>{
+app.post('/login', (req, res) => {
     const sql = `SELECT username,password FROM blog.users where username = '${req.body.name}' and password='${req.body.password}'`;
     // const sql = 'select * from blog.users'
-    query(sql,(err,results)=>{
-        if(err) {
-            res.send({msg:'未知错误'})
-        } 
-        if(results.length === 0){
+    query(sql, (err, results) => {
+        if (err) {
+            res.send({ msg: '未知错误' })
+        }
+        if (results.length === 0) {
             res.send({
-                status:'success',
-                msg :'用户名或密码错误',
+                status: 'success',
+                msg: '用户名或密码错误',
                 results: 0
             })
         }
         else {
             res.send({
                 status: 'success',
-                msg:'成功',
+                msg: '成功',
                 results
             })
         }
     })
 })
 
-app.get('/article',(req,res)=>{
-    query(sql.article,(err,results,field)=>{
-        if(err) {
+app.get('/article', (req, res) => {
+    query(sql.article, (err, results, field) => {
+        if (err) {
             res.send('查询失败')
         }
         res.send(
             {
-                status:200,
-                msg:'success',
+                status: 200,
+                msg: 'success',
+                results
+            })
+    })
+})
+
+app.get('/article', (req, res) => {
+    const sql = `SELECT * from blog.article where id=${req.query.id}`
+    query(sql, (err, results, field) => {
+        if (err) {
+            res.send('查询失败')
+        }
+        res.send(
+            {
+                status: 200,
+                msg: 'success',
+                results
+            })
+    })
+})
+
+app.get('/searchArticle', (req, res) => {
+    let sql = ''
+    if (req.query.content == '') {
+        sql = 'SELECT * FROM blog.article'
+    } else {
+        sql = `SELECT * FROM blog.article WHERE author LIKE '%${req.query.content}%' or title LIKE '%${req.query.content}%' or content LIKE '%${req.query.content}%' or category LIKE '%${req.query.content}%'`
+    }
+    query(sql, (err, results) => {
+        if (err) {
+            res.send('查询失败')
+        }
+        res.send(
+            {
+                status: 200,
+                msg: 'success',
                 results
             })
     })
