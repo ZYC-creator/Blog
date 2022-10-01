@@ -17,7 +17,6 @@
         </el-form>
     </div>
 </template>
- 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue';
 import axios from 'axios';
