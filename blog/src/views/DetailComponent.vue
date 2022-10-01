@@ -110,9 +110,6 @@ export default defineComponent({
 </script>
 
 <style>
-    html{
-        background-color:rgb(234, 233, 233)
-    }
 .card-header {
     display: flex;
     justify-content: space-between;

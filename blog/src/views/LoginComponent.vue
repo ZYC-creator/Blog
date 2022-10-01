@@ -60,7 +60,7 @@ export default defineComponent({
 })
 </script>
 
-<style >
+<style>
 .box{
     width: 30%;
     height: 15rem;
