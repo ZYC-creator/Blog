@@ -103,10 +103,6 @@ export default defineComponent({
                 })
         })
         const search = (input2: string) => {
-            if (input2 === ' ') {
-                console.log('空');
-
-            }
             axios.get(`/searchArticle?content=${input2}`).then((res) => {
                 const data = res.data
                 article.value = data.results

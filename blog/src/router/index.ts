@@ -29,7 +29,33 @@ const routes: Array<RouteRecordRaw> = [
   {
     path:'/admin/:username?',
     name:'admin',
-    component:()=>import('../views/AdminComponent.vue')
+    component:()=>import('../views/AdminComponent.vue'),
+    children:[{
+      path:'/addUsers/:username?',
+      name:'addUsers',
+      component:()=>import('../views/Admin/AddUsers.vue')
+    }, {
+      path:'/modifyUsers/:username?',
+      name:'modifyUsers',
+      component:()=>import('../views/Admin/ModifyUsers.vue')
+    }, {
+      path:'/deleteUsers/:username?',
+      name:"deleteUsers",
+      component:()=>import('../views/Admin/DeleteUsers.vue')
+    },
+    {
+      path:'/addArticle/:title?',
+      name:'addArticle',
+      component:()=>import('../views/Article/AddArticle.vue')
+    }, {
+      path:'/modifyArticle/:title?',
+      name:'modifyArticle',
+      component:()=>import('../views/Article/ModifyArticle.vue')
+    }, {
+      path:'/deleteArticle/:title?',
+      name:"deleteArticle",
+      component:()=>import('../views/Article/DeleteArticle.vue')
+    }]
   }
 ]
 

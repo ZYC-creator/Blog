@@ -39,7 +39,6 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
     const sql = `SELECT username,password FROM blog.users where username = '${req.body.name}' and password='${req.body.password}'`;
-    // const sql = 'select * from blog.users'
     query(sql, (err, results) => {
         if (err) {
             res.send({ msg: '未知错误' })
@@ -107,6 +106,122 @@ app.get('/searchArticle', (req, res) => {
                 msg: 'success',
                 results
             })
+    })
+})
+
+app.get('/users', (req, res) => {
+    query(sql.users, (err, results, field) => {
+        if (err) {
+            res.send('查询失败')
+        }
+        res.send(
+            {
+                status: 200,
+                msg: 'success',
+                results
+            })
+    })
+})
+
+app.delete('/deleteUsers',(req,res)=>{
+    const sql = `DELETE from blog.users WHERE username = '${req.query.username}'`
+    query(sql,(err,results)=>{
+        if(err){
+            res.send('删除失败')
+        }
+        res.send({
+            status: 200,
+            msg: 'success',
+            results
+        })
+    })
+})
+
+app.get('/getUsers', (req, res) => {
+    const sql = `SELECT * from blog.users where username='${req.query.username}'`
+    query(sql, (err, results, field) => {
+        if (err) {
+            res.send('查询失败')
+        }
+        res.send(
+            {
+                status: 200,
+                msg: 'success',
+                results
+            })
+    })
+})
+
+
+app.post('/modifyUsers', (req, res) => {
+    console.log(req.body);
+    const sql = `Update blog.users set username='${req.body.username}',password='${req.body.password}',gender='${req.body.gender}',birthday='${req.body.birthday}' where username='${req.body.username}'`
+    query(sql, (err, results) => {
+        if (err) {
+            res.send({ msg: '未知错误' })
+        }
+        else {
+            res.send({
+                status: 'success',
+                msg: '成功',
+                results
+            })
+        }
+    })
+})
+
+app.delete('/deleteArticle',(req,res)=>{
+    const sql = `DELETE from blog.article WHERE title = '${req.query.title}'`
+    query(sql,(err,results)=>{
+        if(err){
+            res.send('删除失败')
+        }
+        res.send({
+            status: 200,
+            msg: 'success',
+            results
+        })
+    })
+})
+app.get('/getArticle', (req, res) => {
+    const sql = `SELECT * from blog.article where title='${req.query.title}'`
+    query(sql, (err, results, field) => {
+        if (err) {
+            res.send('查询失败')
+        }
+        res.send(
+            {
+                status: 200,
+                msg: 'success',
+                results
+            })
+    })
+})
+
+app.post('/modifyArticle', (req, res) => {
+    console.log(req.body);
+    const sql = `Update blog.article set author='${req.body.author}',title='${req.body.title}',content='${req.body.content}',createtime='${req.body.createtime}',updatetime='${req.body.updatetime}',views='${req.body.views}',category='${req.body.category}' where id='${req.body.id}'`
+    query(sql, (err, results) => {
+        if (err) {
+            res.send({ msg: '未知错误' })
+        }
+        else {
+            res.send({
+                status: 'success',
+                msg: '成功',
+                results
+            })
+        }
+    })
+})
+
+app.post('/addArticle', (req, res) => {
+    const sql = `insert into blog.article(author,title,content,createtime,updatetime,views,category) values ('${req.body.author}','${req.body.title}','${req.body.content}','${req.body.createtime}','${req.body.updatetime}','${req.body.views}','${req.body.category}')`
+    query(sql, (err, result, fields) => {
+        if (err) {
+            res.send({ msg: '发表失败' })
+        }
+        res.send('发表成功')
     })
 })
 module.exports = app;

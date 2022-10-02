@@ -31,21 +31,18 @@
                                         <template #title>
                                             <span>文章管理</span>
                                         </template>
-                                            <el-menu-item index="1-1">发表文章</el-menu-item>
-                                            <el-menu-item index="1-2">修改文章</el-menu-item>
-                                            <el-menu-item index="1-3">删除文章</el-menu-item>
+                                        <router-link to="/addArticle"><el-menu-item index="1-1">发表文章</el-menu-item></router-link>
+                                            <router-link to="/deleteArticle"><el-menu-item index="1-3">删除文章</el-menu-item></router-link>
                                     </el-sub-menu>
                                     <el-sub-menu index="2">
                                         <template #title>分类管理</template>
                                         <el-menu-item index="2-1">新增分类</el-menu-item>
-                                            <el-menu-item index="2-2">修改分类</el-menu-item>
                                             <el-menu-item index="2-3">删除分类</el-menu-item>
                                     </el-sub-menu>
                                     <el-sub-menu index="3">
                                         <template #title>用户管理</template>
-                                        <el-menu-item index="3-1">新增用户</el-menu-item>
-                                            <el-menu-item index="3-2">修改用户</el-menu-item>
-                                            <el-menu-item index="3-3">删除用户</el-menu-item>
+                                        <router-link to="/addUsers"><el-menu-item index="3-1">新增用户</el-menu-item></router-link>
+                                            <router-link to="/deleteUsers"><el-menu-item index="3-2">删除用户</el-menu-item></router-link>
                                     </el-sub-menu>
                                     <el-menu-item index="4">
                                         文章浏览统计
@@ -57,7 +54,9 @@
 
                 </el-aside>
                 <el-container>
-                    <el-main>Main</el-main>
+                    <el-main>
+                        <router-view />
+                    </el-main>
                     <el-footer style="border: 1px rgb(234, 233, 233) solid;height:2.5rem;text-align: center;">
                         <a href="https://github.com/ZYC-creator?tab=repositories" target="_blank">GitHub</a>|
                         <a href="#">个人主页</a>
@@ -82,3 +81,13 @@ export default defineComponent({
     }
 })
 </script>
+
+<style>
+a {
+  text-decoration: none;
+}
+ 
+.router-link-active {
+  text-decoration: none;
+}
+</style>
