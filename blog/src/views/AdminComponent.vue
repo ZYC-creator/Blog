@@ -32,12 +32,12 @@
                                             <span>文章管理</span>
                                         </template>
                                         <router-link to="/addArticle"><el-menu-item index="1-1">发表文章</el-menu-item></router-link>
-                                            <router-link to="/deleteArticle"><el-menu-item index="1-3">删除文章</el-menu-item></router-link>
+                                            <router-link to="/deleteArticle"><el-menu-item index="1-2">删除文章</el-menu-item></router-link>
                                     </el-sub-menu>
                                     <el-sub-menu index="2">
                                         <template #title>分类管理</template>
-                                        <el-menu-item index="2-1">新增分类</el-menu-item>
-                                            <el-menu-item index="2-3">删除分类</el-menu-item>
+                                        <router-link to="/addCategory"><el-menu-item index="2-1">添加分类</el-menu-item></router-link>
+                                            <router-link to="/deleteCategory"><el-menu-item index="2-2">删除分类</el-menu-item></router-link>
                                     </el-sub-menu>
                                     <el-sub-menu index="3">
                                         <template #title>用户管理</template>

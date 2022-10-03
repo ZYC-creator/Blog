@@ -3,7 +3,7 @@
         <el-container>
             <el-header>
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-                    background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" @select="handleSelect">
+                    background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                     <el-menu-item index="0">LOGO</el-menu-item>
                     <div class="flex-grow" />
                     <el-menu-item index="1">首页</el-menu-item>
@@ -11,17 +11,8 @@
                     <el-menu-item index="3">好友</el-menu-item>
                     <el-sub-menu index="4">
                         <template #title>分类</template>
-                        <el-menu-item index="2-1">Java</el-menu-item>
-                        <el-menu-item index="2-2">C</el-menu-item>
-                        <el-menu-item index="2-3">Javascript</el-menu-item>
-                        <el-menu-item index="2-5">C++</el-menu-item>
-                        <el-menu-item index="2-6">Python</el-menu-item>
-                        <el-sub-menu index="2-4">
-                            <template #title>item four</template>
-                            <el-menu-item index="2-4-1">item one</el-menu-item>
-                            <el-menu-item index="2-4-2">item two</el-menu-item>
-                            <el-menu-item index="2-4-3">item three</el-menu-item>
-                        </el-sub-menu>
+                        <el-menu-item :index="'4-'+items.id" v-for="items in category" :key="items.id"
+                            @click="categorySearch(items.category)">{{items.category}}</el-menu-item>
                     </el-sub-menu>
                     <div style="width: 10rem;"></div>
                     <el-menu-item-group index="5">
@@ -87,11 +78,12 @@ export default defineComponent({
         const username = $route.params.username
         const activeIndex = ref('1')
         const $router = useRouter()
-        const handleSelect = (key: string, keyPath: string[]) => {
-            console.log(key, keyPath)
-        }
         const article = ref()
+        let category = ref()
+        axios.get('/category').then((res) => {
+            category.value = res.data.results
 
+        })
         onMounted(() => {
             axios.get('/article').then((res) => {
                 const data = res.data
@@ -111,21 +103,33 @@ export default defineComponent({
                     alert(err)
                 })
         }
+        const categorySearch = (category: string) => {
+            axios.get(`/categorySearch?category=${category}`).then((res) => {
+                const data = res.data
+                article.value = data.results
+            })
+                .catch((err) => {
+                    alert(err)
+                })
+        }
         onUpdated(() => {
+            categorySearch
             search
         })
         const detail = (id: number) => {
             $router.push({ path: `/detail/${id}/${username}` })
         }
-        const admin = ()=>{
-            $router.push({path:`/admin/${username}`})
+        const admin = () => {
+            $router.push({ path: `/admin/${username}` })
         }
+
         return {
             username,
             article,
+            category,
             activeIndex,
-            handleSelect,
             search,
+            categorySearch,
             detail,
             admin,
             Search

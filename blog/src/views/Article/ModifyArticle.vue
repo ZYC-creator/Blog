@@ -61,7 +61,6 @@ export default defineComponent({
     async beforeCreate() {
         const title = useRoute().params.title
         await axios.get(`/getArticle?title=${title}`).then((res) => {
-            console.log(res.data);
             this.$data.form.id = res.data.results[0].id
             this.$data.form.author = res.data.results[0].author
             this.$data.form.title = res.data.results[0].title

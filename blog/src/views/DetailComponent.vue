@@ -3,7 +3,7 @@
         <el-container>
             <el-header>
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-                    background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" @select="handleSelect">
+                    background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                     <el-menu-item index="0">LOGO</el-menu-item>
                     <div class="flex-grow" />
                     <el-menu-item index="1">首页</el-menu-item>
@@ -37,21 +37,21 @@
             </el-header>
             <el-main style="border: 1px solid rgb(234, 233, 233);height:43rem">
                 <el-scrollbar>
-                    <el-card v-for="items in article" :key="items.id">
+                    <el-card>
                         <template #header>
                             <div class="card-header">
-                                <span>{{items.title}}</span>
+                                <span>{{article1.title}}</span>
                                 <el-button class="button" text>Operation button</el-button>
                             </div>
                         </template>
-                        <div>{{items.content}}</div>
+                        <div>{{article1.content}}</div>
                         <el-card style="margin-top:5%">
                         <template #header>
                             <div class="card-header">
                                 <h3>评论</h3>
                             </div>
                         </template>
-                        <div>{{items.content}}</div>
+                        <div>{{article1.content}}</div>
 
                     </el-card>
                     </el-card>
@@ -67,42 +67,43 @@
 </template>
 <script lang="ts">
 import axios from 'axios';
-import { onMounted, ref, defineComponent } from 'vue'
+import { ref, defineComponent, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 export default defineComponent({
     name: 'DetailComponent',
-    setup() {
-        const activeIndex = ref('1')
-        const $router = useRouter()
-        const handleSelect = (key: string, keyPath: string[]) => {
-            console.log(key, keyPath)
+    data() {
+        let article1 = reactive({
+             title:'',
+             content:'',
+
+        })
+        return {
+            article1
         }
+    },
+    beforeCreate() {
         const $route = useRoute()
         const id = $route.params.id
-        console.log(id);
-        
-        const username = $route.params.username
-        console.log(username);
-        
-        const article = ref()
-        onMounted(() => {
-            axios.get(`/article?id=${id}`).then((res) => {
-                article.value = res.data.results
-                console.log(article.value);
+        axios.get(`/articleDetail?id=${id}`).then((res) => {
+                this.$data.article1.content = res.data.results[0].content
+                this.$data.article1.title = res.data.results[0].title
             })
                 .catch((err) => {
                     alert(err)
                 })
-        })
+    },
+    setup() {
+        const activeIndex = ref('1')
+        const $router = useRouter()
+        const $route = useRoute()
+        const username = $route.params.username  
         const admin = ()=>{
             $router.push({path:`/admin/${username}`})
         }
         return {
             activeIndex,
-            article,
             username,
             admin,
-            handleSelect,
         }
     }
 })

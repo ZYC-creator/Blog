@@ -74,8 +74,8 @@ app.get('/article', (req, res) => {
     })
 })
 
-app.get('/article', (req, res) => {
-    const sql = `SELECT * from blog.article where id=${req.query.id}`
+app.get('/articleDetail', (req, res) => {
+    const sql = `SELECT * from blog.article where id='${req.query.id}'`
     query(sql, (err, results, field) => {
         if (err) {
             res.send('查询失败')
@@ -123,10 +123,10 @@ app.get('/users', (req, res) => {
     })
 })
 
-app.delete('/deleteUsers',(req,res)=>{
+app.delete('/deleteUsers', (req, res) => {
     const sql = `DELETE from blog.users WHERE username = '${req.query.username}'`
-    query(sql,(err,results)=>{
-        if(err){
+    query(sql, (err, results) => {
+        if (err) {
             res.send('删除失败')
         }
         res.send({
@@ -154,7 +154,6 @@ app.get('/getUsers', (req, res) => {
 
 
 app.post('/modifyUsers', (req, res) => {
-    console.log(req.body);
     const sql = `Update blog.users set username='${req.body.username}',password='${req.body.password}',gender='${req.body.gender}',birthday='${req.body.birthday}' where username='${req.body.username}'`
     query(sql, (err, results) => {
         if (err) {
@@ -170,10 +169,10 @@ app.post('/modifyUsers', (req, res) => {
     })
 })
 
-app.delete('/deleteArticle',(req,res)=>{
+app.delete('/deleteArticle', (req, res) => {
     const sql = `DELETE from blog.article WHERE title = '${req.query.title}'`
-    query(sql,(err,results)=>{
-        if(err){
+    query(sql, (err, results) => {
+        if (err) {
             res.send('删除失败')
         }
         res.send({
@@ -199,7 +198,6 @@ app.get('/getArticle', (req, res) => {
 })
 
 app.post('/modifyArticle', (req, res) => {
-    console.log(req.body);
     const sql = `Update blog.article set author='${req.body.author}',title='${req.body.title}',content='${req.body.content}',createtime='${req.body.createtime}',updatetime='${req.body.updatetime}',views='${req.body.views}',category='${req.body.category}' where id='${req.body.id}'`
     query(sql, (err, results) => {
         if (err) {
@@ -222,6 +220,89 @@ app.post('/addArticle', (req, res) => {
             res.send({ msg: '发表失败' })
         }
         res.send('发表成功')
+    })
+})
+
+app.get('/category', (req, res) => {
+    query(sql.category, (err, results, fields) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send({
+                status: 'success',
+                msg: '成功',
+                results
+            })
+        }
+    })
+})
+
+app.get('/categorySearch', (req, res) => {
+    sql = `SELECT * FROM blog.article WHERE category='${req.query.category}'`
+    query(sql, (err, results) => {
+        if (err) {
+            res.send('查询失败')
+        }
+        res.send(
+            {
+                status: 200,
+                msg: 'success',
+                results
+            })
+    })
+})
+
+app.delete('/deleteCategory', (req, res) => {
+    const sql = `DELETE from blog.category WHERE category = '${req.query.category}'`
+    query(sql, (err, results) => {
+        if (err) {
+            res.send('删除失败')
+        }
+        res.send({
+            status: 200,
+            msg: 'success',
+            results
+        })
+    })
+})
+app.get('/getCategory', (req, res) => {
+    const sql = `SELECT * from blog.category where category='${req.query.category}'`
+    query(sql, (err, results, field) => {
+        if (err) {
+            res.send('查询失败')
+        }
+        res.send(
+            {
+                status: 200,
+                msg: 'success',
+                results
+            })
+    })
+})
+
+app.post('/modifyCategory', (req, res) => {
+    const sql = `Update blog.category set category='${req.body.category}' where id='${req.body.id}'`
+    query(sql, (err, results) => {
+        if (err) {
+            res.send({ msg: '未知错误' })
+        }
+        else {
+            res.send({
+                status: 'success',
+                msg: '成功',
+                results
+            })
+        }
+    })
+})
+
+app.post('/addCategory', (req, res) => {
+    const sql = `insert into blog.category(category) values ('${req.body.category}')`
+    query(sql, (err, result, fields) => {
+        if (err) {
+            res.send({ msg: '添加失败' })
+        }
+        res.send('添加成功')
     })
 })
 module.exports = app;

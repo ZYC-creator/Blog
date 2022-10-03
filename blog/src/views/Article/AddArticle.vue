@@ -27,7 +27,7 @@
                         <el-input-number v-model="form.views" placeholder="请输入姓名" />
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="Add(form)">修改</el-button>
+                        <el-button type="primary" @click="Add(form)">发表</el-button>
                     </el-form-item>
                 </el-form>
 

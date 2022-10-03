@@ -55,6 +55,18 @@ const routes: Array<RouteRecordRaw> = [
       path:'/deleteArticle/:title?',
       name:"deleteArticle",
       component:()=>import('../views/Article/DeleteArticle.vue')
+    },{
+      path:'/addCategory/',
+      name:'addCategory',
+      component:()=>import('../views/Category/AddCategory.vue')
+    },{
+      path:'/modifyCategory/:id?/:category?',
+      name:'modifyCategory',
+      component:()=>import('../views/Category/ModifyCategory.vue')
+    }, {
+      path:'/deleteCategory/',
+      name:"deleteCategory",
+      component:()=>import('../views/Category/DeleteCategory.vue')
     }]
   }
 ]
