@@ -12,7 +12,7 @@
                         <el-input v-model="form.title" placeholder="请输入标题" />
                     </el-form-item>
                     <el-form-item label="内容">
-                        <el-input v-model="form.content" placeholder="请输入内容" type="textarea" autosize />
+                        <v-md-editor  height="400px" v-model="form.content" >{{}}</v-md-editor>
                     </el-form-item>
                     <el-form-item label="分类">
                         <el-input v-model="form.category" placeholder="请输入分类"/>
