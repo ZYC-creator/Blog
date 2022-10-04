@@ -6,24 +6,10 @@
                     background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                     <el-menu-item index="0">LOGO</el-menu-item>
                     <div class="flex-grow" />
-                    <el-menu-item index="1">首页</el-menu-item>
+                    <router-link :to="{name:'HomePage',params:{username:username}}"><el-menu-item index="1">首页</el-menu-item></router-link>
                     <el-menu-item index="2">个人主页</el-menu-item>
                     <el-menu-item index="3">留言板</el-menu-item>
-                    <el-menu-item index="4">好友</el-menu-item>
-                    <el-sub-menu index="5">
-                        <template #title>分类</template>
-                        <el-menu-item index="5-1">Java</el-menu-item>
-                        <el-menu-item index="5-2">C</el-menu-item>
-                        <el-menu-item index="5-3">Javascript</el-menu-item>
-                        <el-menu-item index="5-4">C++</el-menu-item>
-                        <el-menu-item index="5-5">Python</el-menu-item>
-                        <el-sub-menu index="5-6">
-                            <template #title>item four</template>
-                            <el-menu-item index="5-6-1">item one</el-menu-item>
-                            <el-menu-item index="5-6-2">item two</el-menu-item>
-                            <el-menu-item index="5-6-3">item three</el-menu-item>
-                        </el-sub-menu>
-                    </el-sub-menu>
+                    <!-- <el-menu-item index="4">好友</el-menu-item> -->
                     <div style="width: 60rem;"></div>
                     <el-sub-menu index="6" v-if="username" >
                         <template #title>{{username}}</template>

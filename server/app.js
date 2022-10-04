@@ -305,4 +305,18 @@ app.post('/addCategory', (req, res) => {
         res.send('添加成功')
     })
 })
+
+app.post('/addViews',(req,res)=>{
+    const sql = `update blog.article set views='${req.body.views}' where id=' ${req.body.id}'`
+    query(sql,(err,results)=>{
+        if(err){
+            res.send('未知错误')
+        }
+        res.send({
+            msg:'成功',
+            status:200,
+            results
+        })
+    })
+})
 module.exports = app;

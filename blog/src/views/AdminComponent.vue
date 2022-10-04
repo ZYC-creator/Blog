@@ -6,18 +6,10 @@
                 <el-menu class="el-menu-demo" mode="horizontal" background-color="#545c64" text-color="#fff"
                     active-text-color="#ffd04b">
                     <el-menu-item index="1">Logo</el-menu-item>
-                    <el-menu-item index="2">
+                    <router-link :to="{name:'HomePage',params:{username:username}}"><el-menu-item index="2">
                         首页
-                    </el-menu-item>
+                    </el-menu-item></router-link>
                     <el-menu-item index="3">留言板</el-menu-item>
-                    <el-sub-menu>
-                        <template #title>分类</template>
-                        <el-menu-item index="3-1">Java</el-menu-item>
-                        <el-menu-item index="3-2">C</el-menu-item>
-                        <el-menu-item index="3-3">Javascript</el-menu-item>
-                        <el-menu-item index="3-4">C++</el-menu-item>
-                        <el-menu-item index="3-5">Python</el-menu-item>
-                    </el-sub-menu>
                 </el-menu>
             </el-header>
             <el-container>
@@ -44,9 +36,9 @@
                                         <router-link to="/addUsers"><el-menu-item index="3-1">新增用户</el-menu-item></router-link>
                                             <router-link to="/deleteUsers"><el-menu-item index="3-2">删除用户</el-menu-item></router-link>
                                     </el-sub-menu>
-                                    <el-menu-item index="4">
+                                    <router-link to="/articleStatistic"><el-menu-item index="4">
                                         文章浏览统计
-                                    </el-menu-item>
+                                    </el-menu-item></router-link>
                                 </el-menu>
                             </el-col>
                         </el-row>

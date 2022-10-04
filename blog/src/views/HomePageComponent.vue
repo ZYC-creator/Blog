@@ -6,7 +6,7 @@
                     background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                     <el-menu-item index="0">LOGO</el-menu-item>
                     <div class="flex-grow" />
-                    <el-menu-item index="1">首页</el-menu-item>
+                    <router-link :to="{name:'HomePage',params:{username:username}}"><el-menu-item index="1">首页</el-menu-item></router-link>
                     <el-menu-item index="2">留言板</el-menu-item>
                     <el-menu-item index="3">好友</el-menu-item>
                     <el-sub-menu index="4">
@@ -46,7 +46,7 @@
                                 <span>文章浏览量:{{items.views}}</span>
                             </div>
                         </template>
-                        <el-link @click="detail(items.id)" type="primary" style="text-decoration: underline;">
+                        <el-link @click="detail(items.id,items.views)" type="primary" style="text-decoration: underline;">
                             {{items.title}}</el-link>
                         <div style="overflow: hidden;white-space:nowrap;text-overflow:ellipsis">{{items.content}}</div>
                     </el-card>
@@ -116,7 +116,9 @@ export default defineComponent({
             categorySearch
             search
         })
-        const detail = (id: number) => {
+        const detail = (id: number,views:number) => {
+            views = views+1
+            axios. post('/addViews',{views,id})
             $router.push({ path: `/detail/${id}/${username}` })
         }
         const admin = () => {
