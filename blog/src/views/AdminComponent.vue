@@ -36,9 +36,9 @@
                                         <router-link to="/addUsers"><el-menu-item index="3-1">新增用户</el-menu-item></router-link>
                                             <router-link to="/deleteUsers"><el-menu-item index="3-2">删除用户</el-menu-item></router-link>
                                     </el-sub-menu>
-                                    <router-link to="/articleStatistic"><el-menu-item index="4">
+                                    <!-- <router-link to="/articleStatistic"><el-menu-item index="4">
                                         文章浏览统计
-                                    </el-menu-item></router-link>
+                                    </el-menu-item></router-link> -->
                                 </el-menu>
                             </el-col>
                         </el-row>

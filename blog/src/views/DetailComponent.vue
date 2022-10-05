@@ -27,7 +27,6 @@
                         <template #header>
                             <div class="card-header">
                                 <span>{{article1.title}}</span>
-                                <el-button class="button" text>Operation button</el-button>
                             </div>
                         </template>
                        

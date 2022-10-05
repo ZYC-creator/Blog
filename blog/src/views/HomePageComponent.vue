@@ -8,7 +8,7 @@
                     <div class="flex-grow" />
                     <router-link :to="{name:'HomePage',params:{username:username}}"><el-menu-item index="1">首页</el-menu-item></router-link>
                     <el-menu-item index="2">留言板</el-menu-item>
-                    <el-menu-item index="3">好友</el-menu-item>
+                    <!-- <el-menu-item index="3">好友</el-menu-item> -->
                     <el-sub-menu index="4">
                         <template #title>分类</template>
                         <el-menu-item :index="'4-'+items.id" v-for="items in category" :key="items.id"
