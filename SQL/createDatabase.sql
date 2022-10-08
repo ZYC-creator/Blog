@@ -1,2 +1,0 @@
---创建数据库
-CREATE SCHEMA `blog` DEFAULT CHARACTER SET utf8 ;

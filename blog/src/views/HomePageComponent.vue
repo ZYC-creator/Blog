@@ -6,35 +6,41 @@
                     background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                     <el-menu-item index="0">LOGO</el-menu-item>
                     <div class="flex-grow" />
-                    <router-link :to="{name:'HomePage',params:{username:username}}"><el-menu-item index="1">首页</el-menu-item></router-link>
+                    <router-link :to="{name:'HomePage',params:{username:username}}">
+                        <el-menu-item index="1">首页</el-menu-item>
+                    </router-link>
                     <el-menu-item index="2">留言板</el-menu-item>
                     <!-- <el-menu-item index="3">好友</el-menu-item> -->
-                    <el-sub-menu index="4">
-                        <template #title>分类</template>
-                        <el-menu-item :index="'4-'+items.id" v-for="items in category" :key="items.id"
-                            @click="categorySearch(items.category)">{{items.category}}</el-menu-item>
-                    </el-sub-menu>
                     <div style="width: 10rem;"></div>
-                    <el-menu-item-group index="5">
+                    <el-menu-item-group index="3">
                         <el-input v-model="input2" style="height:50%;width: 100%;" placeholder="Please Input"
                             :suffix-icon="Search" />
                     </el-menu-item-group>
-                    <el-menu-item-group index="6">
+                    <el-menu-item-group index="4">
                         <el-button type="primary" @click="search(input2)">搜索</el-button>
                     </el-menu-item-group>
                     <div style="width: 40rem;"></div>
-                    <el-sub-menu index="7" v-if="username">
+                    <el-sub-menu index="5" v-if="username">
                         <template #title>{{username}}</template>
-                        <el-menu-item index="7-1" v-if="username==='zyc'" @click="admin">博客管理</el-menu-item>
-                        <el-menu-item index="7-2">退出</el-menu-item>
+                        <el-menu-item index="5-1" v-if="username==='zyc'" @click="admin(username)">博客管理</el-menu-item>
+                        <el-menu-item index="5-2">退出</el-menu-item>
                     </el-sub-menu>
                     <el-menu-item v-else>
-                        <router-link to="/login">登录</router-link>&nbsp;<router-link to="/register">注册</router-link>
+                        <router-link to="/login">登录</router-link>&nbsp;
+                        <router-link to="/register">注册</router-link>
                     </el-menu-item>
                 </el-menu>
             </el-header>
+
             <el-main style="border: 1px solid rgb(234, 233, 233);height:43rem">
+
                 <el-scrollbar height="100%">
+                    <div style="padding-bottom: 1rem;">
+                        <span>分类</span>&nbsp;
+                        <el-button type="primary" text @click="allArticle">全部</el-button>
+                        <el-button v-for="items in category" :key="items.id" text type="primary"
+                            @click="search(items.category)">{{items.category}}</el-button>
+                    </div>
                     <el-card v-for="items in article" :key="items.id">
 
                         <template #header>
@@ -46,7 +52,8 @@
                                 <span>文章浏览量:{{items.views}}</span>
                             </div>
                         </template>
-                        <el-link @click="detail(items.id,items.views)" type="primary" style="text-decoration: underline;">
+                        <el-link @click="detail(items.id,items.views,username)" type="primary"
+                            style="text-decoration: underline;">
                             {{items.title}}</el-link>
                         <div style="overflow: hidden;white-space:nowrap;text-overflow:ellipsis">{{items.content}}</div>
                     </el-card>
@@ -62,81 +69,75 @@
 
 <script lang="ts">
 import axios from 'axios';
-import { defineComponent, onMounted, onUpdated, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Search } from '@element-plus/icons-vue'
 export default defineComponent({
     name: 'HomePageComponent',
     data() {
+        
+        let username = useRouter().currentRoute.value.params.username
+        let article = ref()
+        let category = ref()
         return {
+            username,
             input2: '',
+            article,
+            category
         }
     },
-    setup() {
-        const $route = useRoute()
-        const username = $route.params.username
-        const activeIndex = ref('1')
-        const $router = useRouter()
-        const article = ref()
-        let category = ref()
-        axios.get('/category').then((res) => {
-            category.value = res.data.results
+    async beforeCreate() {
+        await axios.get('/article').then((res) => {
+            this.$data.article = res.data.results
 
+        }).catch((err) => {
+            alert(err)
         })
-        onMounted(() => {
+        await axios.get('/category').then((res) => {
+            this.$data.category = res.data.results
+        })
+    },
+    methods:{
+        allArticle:function () {
             axios.get('/article').then((res) => {
                 const data = res.data
-                article.value = data.results
+                this.$data.article = data.results
 
             })
                 .catch((err) => {
                     alert(err)
                 })
-        })
-        const search = (input2: string) => {
+        },
+        search:function (input2: string) {
             axios.get(`/searchArticle?content=${input2}`).then((res) => {
-                const data = res.data
-                article.value = data.results
+                this.$data.article = res.data.results
             })
                 .catch((err) => {
                     alert(err)
                 })
-        }
-        const categorySearch = (category: string) => {
-            axios.get(`/categorySearch?category=${category}`).then((res) => {
-                const data = res.data
-                article.value = data.results
-            })
-                .catch((err) => {
-                    alert(err)
-                })
-        }
-        onUpdated(() => {
-            categorySearch
-            search
-        })
-        const detail = (id: number,views:number) => {
+        },
+    },
+    beforeUpdate() {
+        this.allArticle,
+        this.search
+    },
+    setup(){
+        const activeIndex = ref('1')
+        const $router = useRouter()
+        const detail = (id: number,views:number,username:any) => {
             views = views+1
             axios. post('/addViews',{views,id})
             $router.push({ path: `/detail/${id}/${username}` })
         }
-        const admin = () => {
+        const admin = (username:any) => {
             $router.push({ path: `/admin/${username}` })
         }
-
         return {
-            username,
-            article,
-            category,
             activeIndex,
-            search,
-            categorySearch,
+            Search,
             detail,
-            admin,
-            Search
+            admin
         }
-
     }
 })
 </script>

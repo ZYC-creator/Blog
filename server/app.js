@@ -237,21 +237,6 @@ app.get('/category', (req, res) => {
     })
 })
 
-app.get('/categorySearch', (req, res) => {
-    sql = `SELECT * FROM blog.article WHERE category='${req.query.category}'`
-    query(sql, (err, results) => {
-        if (err) {
-            res.send('查询失败')
-        }
-        res.send(
-            {
-                status: 200,
-                msg: 'success',
-                results
-            })
-    })
-})
-
 app.delete('/deleteCategory', (req, res) => {
     const sql = `DELETE from blog.category WHERE category = '${req.query.category}'`
     query(sql, (err, results) => {
