@@ -3,10 +3,10 @@
         <h3 style="text-align: center;padding-top: 2rem;">注册</h3>
         <el-form :model="form" label-width="100px" style="max-width: 460px;padding-right: 2rem;">
             <el-form-item label="昵称">
-                <el-input v-model="form.username" placeholder="请输入昵称" />
+                <el-input v-model="form.username" placeholder="请输入昵称" clearable="true" />
             </el-form-item>
             <el-form-item label="性别">
-                <el-select v-model="form.gender" placeholder="请选择性别">
+                <el-select v-model="form.gender" placeholder="请选择性别" clearable="true" >
                     <el-option label="男" value="男" />
                     <el-option label="女" value="女" />
                 </el-select>
@@ -14,14 +14,14 @@
             <el-form-item label="出生日期">
                 <el-col :span="11">
                     <el-date-picker v-model="form.birthday" type="date" placeholder="Pick a date" style="width: 100%"
-                        format="YYYY/MM/DD" value-format="YYYY-MM-DD" />
+                        format="YYYY/MM/DD" value-format="YYYY-MM-DD" clearable="true" />
                 </el-col>
             </el-form-item>
             <el-form-item label="密码">
-                <el-input v-model="form.password" placeholder="请输入密码" />
+                <el-input v-model="form.password" placeholder="请输入密码" clearable="true" show-password="true" />
             </el-form-item>
             <el-form-item label="确认密码">
-                <el-input v-model="form.password" placeholder="请再次输入密码" />
+                <el-input placeholder="请再次输入密码" clearable="true" show-password="true" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit" style="width: 50%;">注册</el-button>
@@ -55,6 +55,7 @@ export default defineComponent({
                     alert(err);
                 });
         }
+
         return {
             form,
             onSubmit

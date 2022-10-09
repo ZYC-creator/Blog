@@ -4,10 +4,10 @@
         <el-form :label-position="labelPosition" label-width="50px" :model="formLabelAlign"
             style="max-width: 460px;padding-top: 2rem;padding-right: 2rem;">
             <el-form-item label="姓名">
-                <el-input v-model="formLabelAlign.name" placeholder="请输入用户名" />
+                <el-input v-model="formLabelAlign.name" placeholder="请输入用户名" clearable="true" />
             </el-form-item>
             <el-form-item label="密码">
-                <el-input v-model="formLabelAlign.password" placeholder="请输入密码" />
+                <el-input v-model="formLabelAlign.password" placeholder="请输入密码" clearable="true" />
             </el-form-item>
             <el-form-item>
                 <el-link type="primary">忘记密码</el-link>

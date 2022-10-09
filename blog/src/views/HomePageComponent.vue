@@ -13,8 +13,8 @@
                     <!-- <el-menu-item index="3">好友</el-menu-item> -->
                     <div style="width: 10rem;"></div>
                     <el-menu-item-group index="3">
-                        <el-input v-model="input2" style="height:50%;width: 100%;" placeholder="Please Input"
-                            :suffix-icon="Search" />
+                        <el-input v-model="input2" style="height:50%;width: 100%;" placeholder="关键词搜索"
+                            :suffix-icon="Search" clearable="true" />
                     </el-menu-item-group>
                     <el-menu-item-group index="4">
                         <el-button type="primary" @click="search(input2)">搜索</el-button>
@@ -23,7 +23,7 @@
                     <el-sub-menu index="5" v-if="username">
                         <template #title>{{username}}</template>
                         <el-menu-item index="5-1" v-if="username==='zyc'" @click="admin(username)">博客管理</el-menu-item>
-                        <el-menu-item index="5-2">退出</el-menu-item>
+                        <router-link to="/HomePage"><el-menu-item index="5-2" @click="quit">退出</el-menu-item></router-link>
                     </el-sub-menu>
                     <el-menu-item v-else>
                         <router-link to="/login">登录</router-link>&nbsp;
@@ -31,9 +31,7 @@
                     </el-menu-item>
                 </el-menu>
             </el-header>
-
             <el-main style="border: 1px solid rgb(234, 233, 233);height:43rem">
-
                 <el-scrollbar height="100%">
                     <div style="padding-bottom: 1rem;">
                         <span>分类</span>&nbsp;
@@ -42,9 +40,7 @@
                             @click="search(items.category)">{{items.category}}</el-button>
                     </div>
                     <el-card v-for="items in article" :key="items.id">
-
                         <template #header>
-
                             <div>
                                 <span>作者:{{items.author}}</span>&nbsp;
                                 <span>创作日期:{{items.createtime}}</span>&nbsp;
@@ -75,7 +71,6 @@ import { Search } from '@element-plus/icons-vue'
 export default defineComponent({
     name: 'HomePageComponent',
     data() {
-        
         let username = useRouter().currentRoute.value.params.username
         let article = ref()
         let category = ref()
@@ -109,6 +104,10 @@ export default defineComponent({
                 })
         },
         search:function (input2: string) {
+            input2 = input2.replaceAll('+','%2B')
+            .replaceAll('#','%23').replaceAll(' ','%20')
+            .replaceAll('/','%2F').replaceAll('?','%3F')
+            .replaceAll('&','%26').replaceAll('=','%3D')
             axios.get(`/searchArticle?content=${input2}`).then((res) => {
                 this.$data.article = res.data.results
             })
@@ -116,6 +115,9 @@ export default defineComponent({
                     alert(err)
                 })
         },
+        quit: function(){
+            this.$data.username = ''
+        }
     },
     beforeUpdate() {
         this.allArticle,
