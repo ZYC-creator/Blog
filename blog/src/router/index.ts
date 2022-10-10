@@ -11,11 +11,6 @@ const routes: Array<RouteRecordRaw> = [
     component:()=>import('../views/LoginComponent.vue')
   },
   {
-    path: '/register',
-    name: 'register',
-    component:()=>import('../views/RegisterComponent.vue')
-  },
-  {
     path: '/HomePage/:username?',
     name: 'HomePage',
     props:true,

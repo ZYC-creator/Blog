@@ -27,16 +27,15 @@
                     </el-sub-menu>
                     <el-menu-item v-else>
                         <router-link to="/login">登录</router-link>&nbsp;
-                        <router-link to="/register">注册</router-link>
                     </el-menu-item>
                 </el-menu>
             </el-header>
-            <el-main style="border: 1px solid rgb(234, 233, 233);height:43rem">
+            <el-main style="height:43rem;opacity: 0.8;">
                 <el-scrollbar height="100%">
                     <div style="padding-bottom: 1rem;">
                         <span>分类</span>&nbsp;
-                        <el-button type="primary" text @click="allArticle">全部</el-button>
-                        <el-button v-for="items in category" :key="items.id" text type="primary"
+                        <el-button type="info" text @click="allArticle" style="color: black;">全部</el-button>
+                        <el-button v-for="items in category" :key="items.id" text type="info" style="color: black;"
                             @click="search(items.category)">{{items.category}}</el-button>
                     </div>
                     <el-card v-for="items in article" :key="items.id">
@@ -55,9 +54,9 @@
                     </el-card>
                 </el-scrollbar>
             </el-main>
-            <el-footer style="border: 1px rgb(234, 233, 233) solid;height:2.5rem;text-align: center;">
-                <a href="https://github.com/ZYC-creator?tab=repositories" target="_blank">GitHub</a>|
-                <a href="#">个人中心</a>
+            <el-footer style="height:2.5rem;text-align: center;">
+                <a href="https://github.com/ZYC-creator?tab=repositories" target="_blank" style="color: black;">GitHub</a>|
+                <a href="#" style="color: black;">个人中心</a>
             </el-footer>
         </el-container>
     </div>

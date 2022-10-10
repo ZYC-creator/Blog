@@ -49,9 +49,9 @@
                     <el-main>
                         <router-view />
                     </el-main>
-                    <el-footer style="border: 1px rgb(234, 233, 233) solid;height:2.5rem;text-align: center;">
-                        <a href="https://github.com/ZYC-creator?tab=repositories" target="_blank">GitHub</a>|
-                        <a href="#">个人主页</a>
+                    <el-footer style="height:2.5rem;text-align: center;">
+                        <a href="https://github.com/ZYC-creator?tab=repositories" target="_blank" style="color: black;">GitHub</a>|
+                        <a href="#" style="color: black;">个人主页</a>
                     </el-footer>
                 </el-container>
             </el-container>

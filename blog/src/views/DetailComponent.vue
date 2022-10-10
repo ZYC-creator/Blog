@@ -21,7 +21,7 @@
                     </el-menu-item>
                 </el-menu>
             </el-header>
-            <el-main style="border: 1px solid rgb(234, 233, 233);height:43rem">
+            <el-main style="height:43rem;opacity: 0.8;">
                 <el-scrollbar>
                     <el-card>
                         <template #header>
@@ -31,20 +31,20 @@
                         </template>
                        
                         <v-md-preview  height="400px" :text="article1.content"></v-md-preview>
-                        <!-- <el-card style="margin-top:5%">
+                    </el-card>
+                    <el-card style="margin-top:5%">
                         <template #header>
                             <div class="card-header">
                                 <h3>评论</h3>
                             </div>
                         </template>
-                        <div>{{article1.content}}</div>
+                        <!-- <div>{{article1.content}}</div> -->
 
-                    </el-card> -->
                     </el-card>
                 </el-scrollbar>
 
             </el-main>
-            <el-footer style="border: 1px rgb(234, 233, 233) solid;height:2.5rem;text-align: center;">
+            <el-footer style="height:2.5rem;text-align: center;">
                 <a href="https://github.com/ZYC-creator?tab=repositories" target="_blank">GitHub</a>|
                 <a href="#">个人主页</a>
             </el-footer>

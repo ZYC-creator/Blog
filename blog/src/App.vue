@@ -1,8 +1,12 @@
 <template>
-  <router-view />
+  <div>
+    <router-view />
+  </div>
+  
 </template>
 <style>
   html{
-        background-color:rgb(234, 233, 233)
+        background: url('./assets/preview.jpg') no-repeat ;
+        background-size:cover;
     }
 </style>
