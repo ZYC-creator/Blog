@@ -23,4 +23,4 @@
 四、后台管理  
 ![后台](https://github.com/ZYC-creator/Blog/blob/dev/image/admin.jpg)  
   
-备注：功能暂时还没全部开发完
+备注：功能暂时还没全部开发完，如果您有新的建议可以联系我 QQ：3472841143
