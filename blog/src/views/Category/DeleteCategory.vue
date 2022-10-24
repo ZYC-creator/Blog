@@ -1,6 +1,7 @@
 <template>
     <el-scrollbar height="40rem">
-        <el-table :data="tableData" style="width: 100%">
+      <el-button type="primary" style="float: right"><router-link to="/addCategory" style="color: white">添加分类</router-link></el-button>
+        <el-table :data="tableData" style="width: 100%;opacity: 0.8">
             <el-table-column prop="category" label="分类" width="180" />
             <el-table-column prop="category" label="操作">
                 <template v-slot="scope">

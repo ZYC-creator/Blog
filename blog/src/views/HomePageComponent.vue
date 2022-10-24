@@ -14,7 +14,7 @@
                     <div style="width: 10rem;"></div>
                     <el-menu-item-group index="3">
                         <el-input v-model="input2" style="height:50%;width: 100%;" placeholder="关键词搜索"
-                            :suffix-icon="Search" clearable="true" />
+                            :suffix-icon="Search" />
                     </el-menu-item-group>
                     <el-menu-item-group index="4">
                         <el-button type="primary" @click="search(input2)">搜索</el-button>

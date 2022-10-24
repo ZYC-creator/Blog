@@ -1,6 +1,6 @@
 <template>
 
-    <div style="background-color: white;height: 40rem;">
+    <div style="background-color: white;height: 40rem;opacity: 0.8">
         <el-scrollbar height="40rem">
             <div style="width: 60%;height:50%;margin-left: 20%;padding-top: 5%;">
 

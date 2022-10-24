@@ -1,5 +1,6 @@
 <template>
     <el-scrollbar height="40rem">
+      <el-button type="primary" style="float: right"><router-link to="/addUsers" style="color: white">添加用户</router-link></el-button>
     <el-table :data="tableData" style="width: 100%" >
     <el-table-column prop="username" label="姓名" width="180"  />
     <el-table-column prop="gender" label="性别" width="180" />

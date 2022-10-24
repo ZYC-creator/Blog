@@ -19,23 +19,9 @@
                             <el-col>
                                 <el-menu active-text-color="#ffd04b" background-color="#545c64"
                                     class="el-menu-vertical-demo" default-active="2" text-color="#fff">
-                                    <el-sub-menu index="1">
-                                        <template #title>
-                                            <span>文章管理</span>
-                                        </template>
-                                        <router-link to="/addArticle"><el-menu-item index="1-1">发表文章</el-menu-item></router-link>
-                                            <router-link to="/deleteArticle"><el-menu-item index="1-2">删除文章</el-menu-item></router-link>
-                                    </el-sub-menu>
-                                    <el-sub-menu index="2">
-                                        <template #title>分类管理</template>
-                                        <router-link to="/addCategory"><el-menu-item index="2-1">添加分类</el-menu-item></router-link>
-                                            <router-link to="/deleteCategory"><el-menu-item index="2-2">删除分类</el-menu-item></router-link>
-                                    </el-sub-menu>
-                                    <el-sub-menu index="3">
-                                        <template #title>用户管理</template>
-                                        <router-link to="/addUsers"><el-menu-item index="3-1">新增用户</el-menu-item></router-link>
-                                            <router-link to="/deleteUsers"><el-menu-item index="3-2">删除用户</el-menu-item></router-link>
-                                    </el-sub-menu>
+                                  <router-link to="/deleteArticle" style="color: white"><el-menu-item index="1">文章管理</el-menu-item></router-link>
+                                  <router-link to="/deleteCategory" style="color: white"><el-menu-item index="2">分类管理</el-menu-item></router-link>
+                                  <router-link to="/deleteUsers" style="color: white"><el-menu-item index="3">用户管理</el-menu-item></router-link>
                                     <!-- <router-link to="/articleStatistic"><el-menu-item index="4">
                                         文章浏览统计
                                     </el-menu-item></router-link> -->
@@ -78,8 +64,5 @@ export default defineComponent({
 a {
   text-decoration: none;
 }
- 
-.router-link-active {
-  text-decoration: none;
-}
+
 </style>

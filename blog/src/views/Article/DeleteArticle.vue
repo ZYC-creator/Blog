@@ -1,6 +1,7 @@
 <template>
     <el-scrollbar height="40rem">
-        <el-table :data="tableData" style="width: 100%">
+      <el-button type="primary" style="float: right"><router-link to="/addArticle" style="color: white">发表文章</router-link></el-button>
+        <el-table :data="tableData" style="width: 100%;opacity: 0.8;">
             <el-table-column prop="author" label="作者" width="180" />
             <el-table-column prop="title" label="标题" width="180" />
             <el-table-column prop="category" label="分类" />
